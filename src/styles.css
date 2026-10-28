@@ -100,7 +100,6 @@
   [dir="rtl"] body, [lang="ar"] { font-family: var(--font-arabic); letter-spacing: 0; }
   [lang="fr"], [lang="en"], .font-sans { font-family: var(--font-sans); }
   h1, h2, h3 { font-weight: 700; color: var(--deep); line-height: 1.2; }
-  [lang="ar"] :is(h1, h2, h3) { line-height: 1.5; letter-spacing: 0; }
   h1, h2, h3, p, a, button, label { overflow-wrap: break-word; }
   .tracking-wider { letter-spacing: 0; }
   :focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: 6px; }
@@ -109,6 +108,9 @@
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 }
+
+/* Arabic marks need more vertical room than Latin heading utilities provide. */
+html[lang="ar"] :is(h1, h2, h3) { line-height: 1.5; letter-spacing: 0; }
 
 @utility container-site {
   margin-inline: auto;
