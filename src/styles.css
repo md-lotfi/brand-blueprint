@@ -2,6 +2,21 @@
 @source "../src";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Nexa";
+  src: url("/__l5e/assets-v1/46ef7f1e-3f87-4690-960a-5799164ee9e0/Nexa-Book.ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nexa";
+  src: url("/__l5e/assets-v1/7e73a183-f009-4e84-9afc-088e367fcdeb/Nexa-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -11,7 +26,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --font-sans: "Nexa", "Mulish", system-ui, sans-serif;
+  --font-sans: "Nexa", system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -20,6 +35,8 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-action: var(--action);
+  --color-action-foreground: var(--action-foreground);
   --color-brand: var(--brand);
   --color-brand-light: var(--brand-light);
   --color-deep: var(--deep);
@@ -46,8 +63,10 @@
   --popover: #ffffff;
   --popover-foreground: #333333;
   /* Accessible interactive variant of brand #35B8CF for white button labels */
-  --primary: #167b8e;
+  --primary: #35b8cf;
   --primary-foreground: #ffffff;
+  --action: #167b8e;
+  --action-foreground: #ffffff;
   --brand: #35b8cf;
   --brand-light: #8ce2ee;
   --deep: #235789;
@@ -73,10 +92,14 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-synthesis: none;
+    letter-spacing: 0;
     line-height: 1.65;
   }
   [dir="rtl"] body, [lang="ar"] body { font-family: "Noto Sans Arabic", sans-serif; letter-spacing: 0; }
   h1, h2, h3 { font-weight: 700; color: var(--deep); line-height: 1.2; }
+  h1, h2, h3, p, a, button, label { overflow-wrap: break-word; }
+  .tracking-wider { letter-spacing: 0; }
   :focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: 6px; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }

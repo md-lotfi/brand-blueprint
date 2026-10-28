@@ -15,7 +15,7 @@ function LocaleLayout() {
   const t = useT();
   return (
     <>
-      <a href="#main" className="sr-only z-50 rounded-md bg-primary px-4 py-2 text-primary-foreground focus:not-sr-only focus:fixed focus:start-4 focus:top-4">
+      <a href="#main" className="sr-only z-50 rounded-md bg-action px-4 py-2 text-action-foreground focus:not-sr-only focus:fixed focus:start-4 focus:top-4">
         {t.ui.skip}
       </a>
       <Header />

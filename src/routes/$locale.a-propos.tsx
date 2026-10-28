@@ -17,7 +17,7 @@ function About() {
         <p className="mt-6 max-w-[60ch] text-lg">{t.about.text}</p>
         <p className="mt-5 max-w-[60ch] text-lg">{t.about.objective}</p>
       </div>
-      <img src={brain} alt={t.ui.brainAlt} width={1008} height={912} className="mx-auto w-full max-w-md mix-blend-multiply" />
+      <img src={brain} alt="" width={1008} height={912} className="mx-auto w-full max-w-md mix-blend-multiply" />
     </section>
   );
 }

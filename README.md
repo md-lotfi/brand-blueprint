@@ -1,5 +1,16 @@
 # Welcome to your Lovable project
 
+## Developer handoff: publication dependencies
+
+The showcase design can be completed independently of integrations. Before publishing with functional calls to action:
+- Confirm real App Store and Google Play listings, configure their URLs, add official localized badge assets, then enable their verification flags.
+- Supply patient and psychologist portal destinations.
+- Supply approved resources, privacy, legal notice, and terms destinations/content.
+- Configure and test contact-form delivery; never treat an unconfigured submission as successful.
+- Replace generic device/logo illustrations only when actual product screenshots are provided.
+
+All integration settings are centralized in `src/config/site.ts`. Pending actions remain safely disabled without launch promises or additional visible explanatory copy. Nexa Book/Bold use the supplied fonts; Arabic retains Noto Sans Arabic.
+
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable

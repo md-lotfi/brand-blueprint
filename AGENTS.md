@@ -8,3 +8,9 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Showcase implementation
+- Keep external destinations, store listing verification, localized official badges, and contact delivery in `src/config/site.ts` so deferred integrations can be enabled without page redesign.
+- Render store badges and availability only after verified listings and official localized badge assets are configured; unconfigured actions are inert with accessibility states.
+- Load uploaded media through Lovable Assets pointers; the favicon is the original SVG served directly from public.
+- Keep device illustrations limited to generic frames and the original brand mark until real product screenshots are supplied.

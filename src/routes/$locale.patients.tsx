@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BookOpen, CalendarCheck, Search, UserRound, Video } from "lucide-react";
 import { pageHead } from "@/i18n/head";
 import { useT } from "@/i18n/use-locale";
-import { DownloadButton, PhoneMock, StoreBadges } from "@/components/site/ui-bits";
+import { DownloadButton, PhoneMock, StoreBadges, StoreAvailability } from "@/components/site/ui-bits";
 import calm from "@/assets/calm.jpg";
 import plant from "@/assets/plant.jpg";
 
@@ -25,7 +25,7 @@ function Patients() {
           <div className="mt-8"><DownloadButton /></div>
           <div id="telecharger" className="mt-8 flex scroll-mt-32 flex-col gap-3">
             <StoreBadges />
-            <p className="text-sm text-muted-foreground">{t.home.availability}</p>
+            <StoreAvailability />
           </div>
         </div>
         <div className="relative flex min-h-[420px] items-center justify-center">
@@ -40,7 +40,7 @@ function Patients() {
           <h2 className="mx-auto max-w-3xl text-center text-3xl md:text-4xl">{p.capTitle}</h2>
           <ul className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
             {p.caps.map(([title, text], i) => {
-              const Icon = icons[i]!;
+              const Icon = icons[i] ?? Search;
               return (
                 <li key={title} className="flex flex-col gap-3 rounded-3xl border border-border bg-card p-6 shadow-soft">
                   <span className="grid size-12 place-items-center rounded-full bg-accent"><Icon aria-hidden className="size-6 text-primary" strokeWidth={1.5} /></span>
@@ -55,7 +55,7 @@ function Patients() {
 
       <section className="container-site py-16 md:py-24">
         <div className="grid items-center gap-10 overflow-hidden rounded-3xl bg-soft md:grid-cols-2">
-          <img src={calm} alt={t.ui.calmAlt} loading="lazy" width={1008} height={800} className="h-full w-full object-cover" />
+          <img src={calm} alt="" loading="lazy" width={1008} height={800} className="h-full w-full object-cover" />
           <div className="p-8 md:p-12">
             <h2 className="text-3xl md:text-4xl">{p.closeTitle}</h2>
             <p className="mt-5 max-w-[55ch] text-lg">{p.closeText}</p>
