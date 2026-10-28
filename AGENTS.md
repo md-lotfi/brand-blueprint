@@ -15,3 +15,4 @@
 - Load uploaded media through Lovable Assets pointers; the favicon is the original SVG served directly from public.
 - Keep device illustrations limited to generic frames and the original brand mark until real product screenshots are supplied.
 - Use language-scoped font families, Radix direction props, and logical text alignment for Arabic; isolate Latin brand labels and email/phone fields so mixed-direction content stays legible.
+- Keep showcase motion progressive and scoped to the locale layout; cancel entrance animations on navigation or reduced-motion changes and never hide content pending JavaScript.

@@ -6,3 +6,7 @@
 ## Arabic rendering review
 - [x] Correct language-menu direction, dialog alignment, font inheritance, and mixed-direction form fields.
 - [x] Verify Arabic regular/bold fonts, all four pages, and mobile/desktop interactions.
+
+## Showcase motion
+- [x] Add progressive entrances, illustration movement, and interactive highlights.
+- [x] Verify desktop/mobile RTL motion and reduced-motion behavior.

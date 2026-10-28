@@ -3,6 +3,7 @@ import { isLocale } from "@/i18n/content";
 import { useT } from "@/i18n/use-locale";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { ShowcaseMotion } from "@/components/site/ShowcaseMotion";
 
 export const Route = createFileRoute("/$locale")({
   beforeLoad: ({ params }) => {
@@ -19,6 +20,7 @@ function LocaleLayout() {
         {t.ui.skip}
       </a>
       <Header />
+      <ShowcaseMotion />
       <main id="main" tabIndex={-1} className="overflow-x-clip">
         <Outlet />
       </main>
