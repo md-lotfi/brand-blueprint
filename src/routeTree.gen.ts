@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as LocaleAProposRouteImport } from './routes/$locale.a-propos'
+import { Route as LocalePatientsRouteImport } from './routes/$locale.patients'
+import { Route as LocalePsychologuesRouteImport } from './routes/$locale.psychologues'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +26,80 @@ const LocaleRoute = LocaleRouteImport.update({
   path: '/$locale',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocaleIndexRoute = LocaleIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleAProposRoute = LocaleAProposRouteImport.update({
+  id: '/a-propos',
+  path: '/a-propos',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePatientsRoute = LocalePatientsRouteImport.update({
+  id: '/patients',
+  path: '/patients',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePsychologuesRoute = LocalePsychologuesRouteImport.update({
+  id: '/psychologues',
+  path: '/psychologues',
+  getParentRoute: () => LocaleRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/a-propos': typeof LocaleAProposRoute
+  '/$locale/patients': typeof LocalePatientsRoute
+  '/$locale/psychologues': typeof LocalePsychologuesRoute
+  '/$locale/': typeof LocaleIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleRoute
+  '/$locale/a-propos': typeof LocaleAProposRoute
+  '/$locale/patients': typeof LocalePatientsRoute
+  '/$locale/psychologues': typeof LocalePsychologuesRoute
+  '/$locale': typeof LocaleIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/a-propos': typeof LocaleAProposRoute
+  '/$locale/patients': typeof LocalePatientsRoute
+  '/$locale/psychologues': typeof LocalePsychologuesRoute
+  '/$locale/': typeof LocaleIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$locale'
+  fullPaths:
+    | '/'
+    | '/$locale'
+    | '/$locale/a-propos'
+    | '/$locale/patients'
+    | '/$locale/psychologues'
+    | '/$locale/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$locale'
-  id: '__root__' | '/' | '/$locale'
+  to:
+    | '/'
+    | '/$locale/a-propos'
+    | '/$locale/patients'
+    | '/$locale/psychologues'
+    | '/$locale'
+  id:
+    | '__root__'
+    | '/'
+    | '/$locale'
+    | '/$locale/a-propos'
+    | '/$locale/patients'
+    | '/$locale/psychologues'
+    | '/$locale/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LocaleRoute: typeof LocaleRoute
+  LocaleRoute: typeof LocaleRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +118,57 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$locale/': {
+      id: '/$locale/'
+      path: '/'
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof LocaleIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/a-propos': {
+      id: '/$locale/a-propos'
+      path: '/a-propos'
+      fullPath: '/$locale/a-propos'
+      preLoaderRoute: typeof LocaleAProposRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/patients': {
+      id: '/$locale/patients'
+      path: '/patients'
+      fullPath: '/$locale/patients'
+      preLoaderRoute: typeof LocalePatientsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/psychologues': {
+      id: '/$locale/psychologues'
+      path: '/psychologues'
+      fullPath: '/$locale/psychologues'
+      preLoaderRoute: typeof LocalePsychologuesRouteImport
+      parentRoute: typeof LocaleRoute
+    }
   }
 }
 
+interface LocaleRouteChildren {
+  LocaleAProposRoute: typeof LocaleAProposRoute
+  LocalePatientsRoute: typeof LocalePatientsRoute
+  LocalePsychologuesRoute: typeof LocalePsychologuesRoute
+  LocaleIndexRoute: typeof LocaleIndexRoute
+}
+
+const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleAProposRoute: LocaleAProposRoute,
+  LocalePatientsRoute: LocalePatientsRoute,
+  LocalePsychologuesRoute: LocalePsychologuesRoute,
+  LocaleIndexRoute: LocaleIndexRoute,
+}
+
+const LocaleRouteWithChildren =
+  LocaleRoute._addFileChildren(LocaleRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LocaleRoute: LocaleRoute,
+  LocaleRoute: LocaleRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
