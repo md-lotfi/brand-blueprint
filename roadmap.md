@@ -8,5 +8,5 @@
 - [x] Verify Arabic regular/bold fonts, all four pages, and mobile/desktop interactions.
 
 ## Showcase motion
-- [ ] Add progressive entrances, illustration movement, and interactive highlights.
-- [ ] Verify desktop/mobile RTL motion and reduced-motion behavior.
+- [x] Add progressive entrances, illustration movement, and interactive highlights.
+- [x] Verify desktop/mobile RTL motion and reduced-motion behavior.
