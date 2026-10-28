@@ -4,7 +4,7 @@ import { Globe, Menu, User, Users, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetClose, SheetContent, SheetTitle } from "@/components/ui/sheet";
-import { locales, localeNames } from "@/i18n/content";
+import { locales, localeNames, dirOf } from "@/i18n/content";
 import { pageFromPath, pagePaths, useLocale, useT, type PageKey } from "@/i18n/use-locale";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
@@ -34,14 +34,14 @@ export function Header() {
   );
 
   const langSwitch = (
-    <DropdownMenu>
+    <DropdownMenu dir={dirOf(locale)}>
       <DropdownMenuTrigger className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm hover:bg-accent" aria-label={t.ui.language}>
-        <Globe aria-hidden className="size-4" /> <span className="uppercase">{locale}</span>
+        <Globe aria-hidden className="size-4" /> <span dir="ltr" className="font-sans uppercase">{locale}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {locales.map((l) => (
           <DropdownMenuItem key={l} asChild>
-            <Link to={pagePaths[current]} params={{ locale: l }} lang={l} aria-current={l === locale ? "true" : undefined} className={l === locale ? "font-bold" : ""}>
+            <Link to={pagePaths[current]} params={{ locale: l }} lang={l} dir={dirOf(l)} aria-current={l === locale ? "true" : undefined} className={`text-start ${l === locale ? "font-bold" : ""}`}>
               {localeNames[l]}
             </Link>
           </DropdownMenuItem>

@@ -14,3 +14,4 @@
 - Render store badges and availability only after verified listings and official localized badge assets are configured; unconfigured actions are inert with accessibility states.
 - Load uploaded media through Lovable Assets pointers; the favicon is the original SVG served directly from public.
 - Keep device illustrations limited to generic frames and the original brand mark until real product screenshots are supplied.
+- Use language-scoped font families, Radix direction props, and logical text alignment for Arabic; isolate Latin brand labels and email/phone fields so mixed-direction content stays legible.

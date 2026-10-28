@@ -46,6 +46,7 @@ export function ContactForm() {
     const id = `cf-${key}`;
     const common = {
       id, name: key, value: f[key], required,
+      dir: key === "email" || key === "phone" ? "ltr" as const : "auto" as const,
       "aria-invalid": !!err || undefined,
       "aria-describedby": err ? `${id}-err` : undefined,
       onChange: (e: { target: { value: string } }) => setF((p) => ({ ...p, [key]: e.target.value })),
