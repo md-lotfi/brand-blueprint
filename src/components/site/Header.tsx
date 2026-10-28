@@ -65,7 +65,7 @@ export function Header() {
       </div>
 
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-        <SheetContent side={locale === "ar" ? "left" : "right"} className="flex flex-col gap-6 p-6 [&>button:last-child]:hidden">
+        <SheetContent side={locale === "ar" ? "left" : "right"} aria-describedby={undefined} className="flex flex-col gap-6 p-6 [&>button:first-child]:hidden">
           <div className="flex items-center justify-between">
             <SheetTitle className="text-lg">{t.ui.menu}</SheetTitle>
             <SheetClose className="rounded-full p-2 hover:bg-accent" aria-label={t.ui.close}><X aria-hidden className="size-5" /></SheetClose>
