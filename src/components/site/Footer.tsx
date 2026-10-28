@@ -6,7 +6,7 @@ import { ExternalAction, Logo } from "./ui-bits";
 export function Footer() {
   const t = useT();
   const locale = useLocale();
-  const cls = "text-sm text-foreground hover:text-primary";
+  const cls = "text-sm text-foreground hover:text-action";
   return (
     <footer className="border-t border-border bg-background">
       <div className="container-site flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between">

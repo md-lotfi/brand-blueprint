@@ -21,7 +21,7 @@ function Home() {
     <>
       <section className="container-site grid items-center gap-12 py-14 md:py-20 lg:grid-cols-2">
         <div className="max-w-xl">
-          <p className="mb-4 font-bold tracking-wider text-primary rtl:tracking-normal">{h.slogan}</p>
+          <p className="mb-4 font-bold text-action">{h.slogan}</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl">{h.title}</h1>
           <p className="mt-6 max-w-[60ch] text-lg">{h.text}</p>
           <div className="mt-8 flex flex-col items-start gap-5">
@@ -47,7 +47,7 @@ function Home() {
             <article className="flex flex-col gap-4 rounded-3xl border border-border bg-card p-8 shadow-soft">
               <span className="grid size-16 place-items-center rounded-full bg-accent"><User aria-hidden className="size-8 text-primary" strokeWidth={1.5} /></span>
               <h3 className="text-2xl">{h.patTitle}</h3>
-              <p className="font-bold text-primary">{h.patSub}</p>
+              <p className="font-bold text-action">{h.patSub}</p>
               <p>{h.patText}</p>
               <div className="mt-2"><DownloadButton /></div>
               <div id="telecharger" className="mt-2 flex flex-col gap-3 border-t border-border pt-5 scroll-mt-32">
@@ -58,7 +58,7 @@ function Home() {
             <article className="flex flex-col gap-4 rounded-3xl border border-border bg-card p-8 shadow-soft">
               <span className="grid size-16 place-items-center rounded-full bg-accent"><Users aria-hidden className="size-8 text-primary" strokeWidth={1.5} /></span>
               <h3 className="text-2xl">{h.psyTitle}</h3>
-              <p className="font-bold text-primary">{h.psySub}</p>
+              <p className="font-bold text-action">{h.psySub}</p>
               <p>{h.psyText}</p>
               <div className="mt-2"><ExternalAction href={siteConfig.psychologistPortalUrl} className={btnOutline}>{h.psyAction} <Arrow /></ExternalAction></div>
               <a href="#contact" className={linkSecondary} onClick={(e) => { e.preventDefault(); scrollToId("contact"); }}>{h.contactTeam} <Arrow /></a>
@@ -69,7 +69,7 @@ function Home() {
 
       <section id="contact" className="container-site grid scroll-mt-24 gap-12 py-16 md:py-24 lg:grid-cols-2">
         <div className="relative">
-          <p className="mb-3 font-bold tracking-wider text-primary rtl:tracking-normal">{h.contactSlogan}</p>
+          <p className="mb-3 font-bold text-action">{h.contactSlogan}</p>
           <h2 className="text-3xl md:text-4xl">{h.contactTitle}</h2>
           <p className="mt-5 max-w-[55ch] text-lg">{h.contactText}</p>
           <img src={plant} alt="" loading="lazy" width={800} height={1008} className="mt-10 hidden w-48 mix-blend-multiply lg:block" />

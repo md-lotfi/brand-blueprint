@@ -55,7 +55,7 @@ function Patients() {
 
       <section className="container-site py-16 md:py-24">
         <div className="grid items-center gap-10 overflow-hidden rounded-3xl bg-soft md:grid-cols-2">
-          <img src={calm} alt={t.ui.calmAlt} loading="lazy" width={1008} height={800} className="h-full w-full object-cover" />
+          <img src={calm} alt="" loading="lazy" width={1008} height={800} className="h-full w-full object-cover" />
           <div className="p-8 md:p-12">
             <h2 className="text-3xl md:text-4xl">{p.closeTitle}</h2>
             <p className="mt-5 max-w-[55ch] text-lg">{p.closeText}</p>

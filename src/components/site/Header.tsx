@@ -7,6 +7,7 @@ import { Sheet, SheetClose, SheetContent, SheetTitle } from "@/components/ui/she
 import { locales, localeNames } from "@/i18n/content";
 import { pageFromPath, pagePaths, useLocale, useT, type PageKey } from "@/i18n/use-locale";
 import { siteConfig } from "@/config/site";
+import { Button } from "@/components/ui/button";
 import { ExternalAction, Logo, btnOutline } from "./ui-bits";
 
 export function Header() {
@@ -19,7 +20,7 @@ export function Header() {
 
   const items: [PageKey, string][] = [["home", t.nav.home], ["patients", t.nav.patients], ["psy", t.nav.psy], ["about", t.nav.about]];
   const linkCls = (k: PageKey) =>
-    `border-b-2 py-1 transition-colors ${current === k ? "border-brand text-primary font-bold" : "border-transparent text-foreground hover:text-primary"}`;
+    `border-b-2 py-1 transition-colors ${current === k ? "border-brand text-action font-bold" : "border-transparent text-foreground hover:text-action"}`;
 
   const navLinks = (onClick?: () => void) => (
     <>
@@ -56,10 +57,10 @@ export function Header() {
         <nav aria-label={t.ui.menu} className="hidden items-center gap-6 text-sm lg:flex">{navLinks()}</nav>
         <div className="flex shrink-0 items-center gap-2">
           {langSwitch}
-          <button onClick={() => setLoginOpen(true)} className={`${btnOutline} hidden px-5 py-2 text-sm sm:inline-flex`}>{t.nav.login}</button>
-          <button onClick={() => setMenuOpen(true)} className="rounded-full p-2 hover:bg-accent lg:hidden" aria-label={t.ui.menu}>
+          <Button variant="outline" onClick={() => setLoginOpen(true)} className={`${btnOutline} hidden h-auto px-5 py-2 text-sm sm:inline-flex`}>{t.nav.login}</Button>
+          <Button variant="ghost" size="icon" onClick={() => setMenuOpen(true)} className="rounded-full lg:hidden" aria-label={t.ui.menu}>
             <Menu aria-hidden className="size-6" />
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -70,7 +71,7 @@ export function Header() {
             <SheetClose className="rounded-full p-2 hover:bg-accent" aria-label={t.ui.close}><X aria-hidden className="size-5" /></SheetClose>
           </div>
           <nav className="flex flex-col gap-4 text-base">{navLinks(() => setMenuOpen(false))}</nav>
-          <button onClick={() => { setMenuOpen(false); setLoginOpen(true); }} className={btnOutline}>{t.nav.login}</button>
+          <Button variant="outline" onClick={() => { setMenuOpen(false); setLoginOpen(true); }} className={`${btnOutline} h-auto whitespace-normal`}>{t.nav.login}</Button>
         </SheetContent>
       </Sheet>
 
