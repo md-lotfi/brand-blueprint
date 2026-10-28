@@ -84,6 +84,7 @@
   --input: #cfe6ec;
   --ring: #167b8e;
   --shadow-soft: 0 10px 30px -15px color-mix(in oklab, #235789 25%, transparent);
+  --shadow-lift: 0 20px 40px -20px color-mix(in oklab, var(--deep) 35%, transparent);
 }
 
 @layer base {
@@ -124,4 +125,34 @@ html[lang="ar"] :is(h1, h2, h3) { line-height: 1.5; letter-spacing: 0; }
 
 @utility blob {
   border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%;
+}
+
+@keyframes illustration-float {
+  0%, 100% { translate: 0 0; rotate: -0.5deg; }
+  50% { translate: 0 -10px; rotate: 0.5deg; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #main [role="img"] {
+    animation: illustration-float 7s ease-in-out infinite;
+  }
+  #main article, #main li {
+    transition: translate 350ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 350ms ease, border-color 350ms ease;
+  }
+  #main a, #main button:not(:disabled) {
+    transition: translate 250ms ease, background-color 250ms ease, color 250ms ease;
+  }
+  #main a svg { transition: translate 250ms ease; }
+  #main form:focus-within { border-color: var(--action); }
+  #main form { transition: border-color 300ms ease; }
+  @media (hover: hover) and (pointer: fine) {
+    #main article:hover, #main li:hover {
+      translate: 0 -6px;
+      box-shadow: var(--shadow-lift);
+      border-color: var(--brand);
+    }
+    #main a:hover, #main button:not(:disabled):hover { translate: 0 -2px; }
+    #main a:hover svg { translate: 3px 0; }
+    html[dir="rtl"] #main a:hover svg { translate: -3px 0; }
+  }
 }
