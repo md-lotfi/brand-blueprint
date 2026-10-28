@@ -40,7 +40,7 @@ function Psychologists() {
           <h2 className="text-center text-3xl md:text-4xl">{p.capTitle}</h2>
           <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {p.caps.map(([title, text], i) => {
-              const Icon = icons[i];
+              const Icon = icons[i]!;
               return (
                 <li key={title} className="flex flex-col gap-3 rounded-3xl border border-border bg-card p-6 shadow-soft">
                   <span className="grid size-12 place-items-center rounded-full bg-accent"><Icon aria-hidden className="size-6 text-primary" strokeWidth={1.5} /></span>
