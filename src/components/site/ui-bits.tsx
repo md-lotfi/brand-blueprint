@@ -10,7 +10,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <img src={logo} alt="" width={44} height={35} className="h-8 w-auto shrink-0" />
-      <span dir="ltr" className="text-2xl font-bold text-deep">Mindcare</span>
+      <span dir="ltr" className="font-sans text-2xl font-bold text-deep">Mindcare</span>
     </span>
   );
 }
@@ -76,7 +76,7 @@ export function PhoneMock({ alt }: { alt: string }) {
       <div className="absolute inset-x-1/3 top-2 h-4 rounded-full bg-deep" />
       <div className="flex h-full flex-col items-center justify-center gap-3 rounded-[1.8rem] bg-soft">
         <img src={logo} alt="" className="h-14 w-auto" />
-        <span dir="ltr" className="text-xl font-bold text-deep">Mindcare</span>
+        <span dir="ltr" className="font-sans text-xl font-bold text-deep">Mindcare</span>
       </div>
     </div>
   );
@@ -88,7 +88,7 @@ export function LaptopMock({ alt }: { alt: string }) {
       <div className="aspect-[16/10] rounded-t-2xl border-[10px] border-deep bg-soft">
         <div className="flex h-full flex-col items-center justify-center gap-3">
           <img src={logo} alt="" className="h-16 w-auto" />
-          <span dir="ltr" className="text-2xl font-bold text-deep">Mindcare</span>
+          <span dir="ltr" className="font-sans text-2xl font-bold text-deep">Mindcare</span>
         </div>
       </div>
       <div className="mx-[-6%] h-4 rounded-b-2xl bg-deep" />
