@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { siteConfig } from "@/config/site";
 import { useLocale, useT } from "@/i18n/use-locale";
 import { Arrow, btnPrimary } from "./ui-bits";
+import { Button } from "@/components/ui/button";
 
 type Fields = { name: string; email: string; phone: string; message: string };
 type Status = "idle" | "sending" | "success" | "error";
@@ -65,11 +66,10 @@ export function ContactForm() {
       {field("email", t.form.email, "email")}
       {field("phone", t.form.phone, "tel", false)}
       {field("message", t.form.message)}
-      <button type="submit" disabled={!endpoint || status === "sending"} className={`${btnPrimary} mt-2 w-full disabled:cursor-not-allowed disabled:opacity-60`}>
+      <Button type="submit" disabled={!endpoint || status === "sending"} aria-disabled={!endpoint || status === "sending"} className={`${btnPrimary} mt-2 h-auto w-full whitespace-normal disabled:cursor-not-allowed disabled:opacity-60`}>
         {status === "sending" ? t.ui.sending : t.form.submit} <Arrow />
-      </button>
+      </Button>
       <p role="status" aria-live="polite" className="text-sm">
-        {!endpoint && <span className="text-muted-foreground">{t.ui.formUnavailable}</span>}
         {status === "success" && <span className="text-primary">{t.ui.success}</span>}
         {status === "error" && <span className="text-destructive">{t.ui.failure}</span>}
       </p>

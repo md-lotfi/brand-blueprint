@@ -35,7 +35,7 @@ const fr = {
   form: { name: "Nom et prénom", email: "Adresse e-mail professionnelle", phone: "Téléphone (facultatif)", message: "Votre message", submit: "Contacter notre équipe" },
   about: {
     title: "Votre santé mentale, notre priorité",
-    text: "Mindcare est une plateforme de téléconsultation en santé mentale en Algérie,",
+    text: "Mindcare est une plateforme de téléconsultation en santé mentale en Algérie.",
     objective: "Notre objectif : Rendre l’accompagnement psychologique plus accessible, sécurisé et adapté aux besoins de chacun, dans le respect de la confidentialité.",
   },
   patients: {
@@ -73,7 +73,6 @@ const fr = {
     language: "Langue",
     menu: "Menu",
     close: "Fermer",
-    unavailable: "Bientôt disponible",
     loginTitle: "Connexion",
     loginDesc: "Choisissez votre espace.",
     patient: "Patient",
@@ -83,7 +82,6 @@ const fr = {
     sending: "Envoi en cours…",
     success: "Merci, votre message a bien été envoyé.",
     failure: "L’envoi a échoué. Veuillez réessayer.",
-    formUnavailable: "Le formulaire n’est pas encore disponible.",
     appStore: "Télécharger dans l’App Store",
     googlePlay: "Disponible sur Google Play",
     phoneAlt: "Illustration d’un téléphone affichant le logo Mindcare",
@@ -128,7 +126,7 @@ const en: Dict = {
   form: { name: "Full name", email: "Professional email address", phone: "Phone (optional)", message: "Your message", submit: "Contact our team" },
   about: {
     title: "Your mental health, our priority",
-    text: "Mindcare is a mental-health teleconsultation platform in Algeria,",
+    text: "Mindcare is a mental-health teleconsultation platform in Algeria.",
     objective: "Our goal: to make psychological support more accessible, secure and suited to everyone’s needs, while respecting confidentiality.",
   },
   patients: {
@@ -166,7 +164,6 @@ const en: Dict = {
     language: "Language",
     menu: "Menu",
     close: "Close",
-    unavailable: "Coming soon",
     loginTitle: "Log in",
     loginDesc: "Choose your space.",
     patient: "Patient",
@@ -176,7 +173,6 @@ const en: Dict = {
     sending: "Sending…",
     success: "Thank you, your message has been sent.",
     failure: "Sending failed. Please try again.",
-    formUnavailable: "The form is not available yet.",
     appStore: "Download on the App Store",
     googlePlay: "Get it on Google Play",
     phoneAlt: "Illustration of a phone showing the Mindcare logo",
@@ -219,7 +215,7 @@ const ar: Dict = {
   form: { name: "الاسم واللقب", email: "البريد الإلكتروني المهني", phone: "الهاتف (اختياري)", message: "رسالتك", submit: "تواصل مع فريقنا" },
   about: {
     title: "صحتك النفسية، أولويتنا",
-    text: "Mindcare هي منصة للاستشارة النفسية عن بُعد في الجزائر،",
+    text: "Mindcare هي منصة للاستشارة النفسية عن بُعد في الجزائر.",
     objective: "هدفنا: جعل المرافقة النفسية أكثر سهولةً وأمانًا وملاءمةً لاحتياجات كل شخص، مع احترام السرّية.",
   },
   patients: {
@@ -257,7 +253,6 @@ const ar: Dict = {
     language: "اللغة",
     menu: "القائمة",
     close: "إغلاق",
-    unavailable: "قريبًا",
     loginTitle: "تسجيل الدخول",
     loginDesc: "اختر مساحتك.",
     patient: "مريض",
@@ -267,7 +262,6 @@ const ar: Dict = {
     sending: "جارٍ الإرسال…",
     success: "شكرًا، تم إرسال رسالتك.",
     failure: "تعذّر الإرسال. يرجى المحاولة مجددًا.",
-    formUnavailable: "النموذج غير متاح بعد.",
     appStore: "تنزيل من App Store",
     googlePlay: "احصل عليه من Google Play",
     phoneAlt: "رسم لهاتف يعرض شعار Mindcare",

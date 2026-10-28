@@ -3,7 +3,7 @@ import { User, Users } from "lucide-react";
 import { pageHead } from "@/i18n/head";
 import { useLocale, useT } from "@/i18n/use-locale";
 import { siteConfig } from "@/config/site";
-import { Arrow, DownloadButton, ExternalAction, PhoneMock, StoreBadges, btnOutline, linkSecondary, scrollToId } from "@/components/site/ui-bits";
+import { Arrow, DownloadButton, ExternalAction, PhoneMock, StoreBadges, StoreAvailability, btnOutline, linkSecondary, scrollToId } from "@/components/site/ui-bits";
 import { ContactForm } from "@/components/site/ContactForm";
 import plant from "@/assets/plant.jpg";
 import brain from "@/assets/brain.jpg";
@@ -52,7 +52,7 @@ function Home() {
               <div className="mt-2"><DownloadButton /></div>
               <div id="telecharger" className="mt-2 flex flex-col gap-3 border-t border-border pt-5 scroll-mt-32">
                 <StoreBadges />
-                <p className="text-sm text-muted-foreground">{h.availability}</p>
+                <StoreAvailability />
               </div>
             </article>
             <article className="flex flex-col gap-4 rounded-3xl border border-border bg-card p-8 shadow-soft">
