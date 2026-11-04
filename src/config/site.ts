@@ -8,7 +8,7 @@ export const siteConfig = {
   "appStoreBadges": {"fr": null, "en": null, "ar": null},
   "googlePlayBadges": {"fr": null, "en": null, "ar": null},
   "patientEntryUrl": null,
-  "psychologistPortalUrl": null,
+  "psychologistPortalUrl": "https://mindcare.raystate.com/",
   "resourcesUrl": null,
   "privacyUrl": null,
   "legalNoticeUrl": null,

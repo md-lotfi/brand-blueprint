@@ -36,7 +36,7 @@ The public URL is `https://aboutcare.raystate.com`, configured through `publicOr
 Keep all destinations in `src/config/site.ts`. Its `siteConfig` object deliberately uses valid JSON syntax so the Python generator can read it without a TypeScript toolchain.
 
 - Store actions require a real listing URL, verification flag, and official badge asset for the current language. Availability text requires both stores. Put official local badges in `assets/` and use paths such as `assets/app-store-fr.svg`.
-- Patient and psychologist entry points, resources, and legal URLs remain unavailable until supplied. No legal copy is invented.
+- Psychologist access links use `https://mindcare.raystate.com/`. Patient entry points, resources, and legal URLs remain unavailable until supplied. No legal copy is invented.
 - `contactEndpoint` must accept cross-origin JSON POST `{name, email, phone, message, locale}` and return a successful HTTP status only after accepting delivery. The submit button stays disabled without a configured endpoint and JavaScript. Verify actual inbox delivery separately.
 - Device illustrations remain generic frames with the original logo, pending real screenshots.
 

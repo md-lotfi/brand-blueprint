@@ -55,7 +55,7 @@ try {
  await call('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});await call('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
  assert(await evaluate(`!document.querySelector('.mobile-nav').open&&document.activeElement.matches('.mobile-nav summary')`),'Escape closes menu and returns focus');
  await evaluate(`document.querySelector('.login summary').click()`);await delay(100);
- assert(await evaluate(`document.querySelector('.login').open&&document.querySelectorAll('.login [aria-disabled="true"]').length===2`),'login choices stay disabled');
+ assert(await evaluate(`document.querySelector('.login').open&&document.querySelectorAll('.login [aria-disabled="true"]').length===1&&document.querySelector('.login a').href==='https://mindcare.raystate.com/'`),'psychologist login enabled and patient login disabled');
  assert(await evaluate(`document.querySelector('form button').disabled`),'unconfigured contact disabled');
  // Even programmatic form submission cannot cause accidental navigation or delivery.
  assert(await evaluate(`!document.querySelector('form').dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}))`),'contact submission prevented');

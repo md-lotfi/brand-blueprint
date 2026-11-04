@@ -7,6 +7,7 @@
 - [x] Provide reproducible generation and static validation.
 - [x] Configure `aboutcare.raystate.com`; generate CNAME, canonical metadata and sitemap.
 - [ ] Supply verified store listings and official localized badges.
-- [ ] Supply approved portal, resources and legal destinations.
+- [x] Configure all psychologist access links to `https://mindcare.raystate.com/`.
+- [ ] Supply approved patient entry, resources and legal destinations.
 - [ ] Configure contact delivery and verify inbox receipt.
 - [ ] Push and configure GitHub Pages; verify live routes and HTTPS.
