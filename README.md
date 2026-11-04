@@ -38,7 +38,7 @@ Keep all destinations in `src/config/site.ts`. Its `siteConfig` object deliberat
 - Store actions require a real listing URL, verification flag, and official badge asset for the current language. Availability text requires both stores. Put official local badges in `assets/` and use paths such as `assets/app-store-fr.svg`.
 - Psychologist access links use `https://mindcare.raystate.com/`. Patient entry points, resources, and legal URLs remain unavailable until supplied. No legal copy is invented.
 - `contactEndpoint` must accept cross-origin JSON POST `{name, email, phone, message, locale}` and return a successful HTTP status only after accepting delivery. The submit button stays disabled without a configured endpoint and JavaScript. Verify actual inbox delivery separately.
-- Device illustrations remain generic frames with the original logo, pending real screenshots.
+- Mobile frames display the supplied `assets/mindcare-home.png` welcome-screen capture, in its original French language. The laptop illustration remains a generic frame with the original logo.
 
 The original Nexa files were copied from the main Mindcare application and match the uploaded asset-pointer sizes. Original JPG illustrations and SVG favicon are local. Noto Sans Arabic and its license come from the Staffly reference. `tools/asset_checksums.json` records the local assets; update it deliberately if artwork changes.
 

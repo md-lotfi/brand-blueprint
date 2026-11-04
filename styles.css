@@ -9,3 +9,8 @@
 @keyframes float{0%,100%{translate:0 0;rotate:-.5deg}50%{translate:0 -10px;rotate:.5deg}}@media(prefers-reduced-motion:no-preference){main .phone,main .laptop{animation:float 7s ease-in-out infinite}main article,main li{transition:translate .35s,box-shadow .35s} @media(hover:hover) and (pointer:fine){main article:hover,main li:hover{translate:0 -6px;box-shadow:0 20px 40px -20px #23578959}}}@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
 main:not([data-page="home"]) h1{font-size:clamp(2.25rem,4vw,3rem)}[data-page="patients"] .plant{inset-inline-start:0;inset-inline-end:auto}
+
+/* Preserve the entire supplied screen, including its original proportions. */
+.phone--screenshot{aspect-ratio:auto;overflow:hidden}
+.phone--screenshot:before{display:none}
+.phone--screenshot>img{width:100%;height:auto}

@@ -40,10 +40,10 @@ def render_all():
                 return os.path.relpath(path, directory) + ('/' if str(path).endswith('/') else '')
             def route(lang=locale, key='home'):
                 return url(f'{lang}/{PAGES[key]}')
-            def image(name, cls='', lazy=True):
-                sizes = {'plant.jpg': (800,1008), 'brain.jpg': (1008,912), 'calm.jpg': (1008,800), 'psychologist.jpg': (912,912), 'mindcare-logo.svg': (222,175)}
+            def image(name, cls='', lazy=True, alt=''):
+                sizes = {'plant.jpg': (800,1008), 'brain.jpg': (1008,912), 'calm.jpg': (1008,800), 'psychologist.jpg': (912,912), 'mindcare-logo.svg': (222,175), 'mindcare-home.png': (1080,2170)}
                 w,h = sizes[name]
-                return f'<img src="{e(url("assets/"+name))}" alt="" width="{w}" height="{h}" class="{cls}"'+ (' loading="lazy"' if lazy else '')+'>'
+                return f'<img src="{e(url("assets/"+name))}" alt="{e(alt)}" width="{w}" height="{h}" class="{cls}"'+ (' loading="lazy"' if lazy else '')+'>'
             def action(key, text, cls='button'):
                 href = C.get(key)
                 if not href:
@@ -57,6 +57,8 @@ def render_all():
             availability = f'<p class="muted">{e(t["home"]["availability"])}</p>' if len(stores)==2 else ''
             download = (f'<a class="button" href="{"#telecharger" if page in ("home", "patients") else route(key="patients")+"#telecharger"}">{e(t["home"]["download"])}</a>' if stores else f'<span role="link" aria-disabled="true" class="button unavailable">{e(t["home"]["download"])}</span>')
             def mock(kind):
+                if kind=='phone':
+                    return f'<div class="device-scene"><div class="blob"></div><div class="phone phone--screenshot">{image("mindcare-home.png",lazy=False,alt=t["ui"]["phoneAlt"])}</div>{image("plant.jpg","plant",False)}</div>'
                 return f'<div class="device-scene"><div class="blob"></div><div class="{kind}" role="img" aria-label="{e(t["ui"]["phoneAlt" if kind=="phone" else "laptopAlt"])}"><div>{logo()}</div></div>'+ (image('plant.jpg','plant',False) if kind=='phone' else '')+'</div>'
             def text(tag, value, cls=''):
                 return f'<{tag} class="{cls}">{e(value)}</{tag}>'
