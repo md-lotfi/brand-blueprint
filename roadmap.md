@@ -1,12 +1,12 @@
-# Showcase completion
-- [x] Apply supplied Nexa fonts and original SVG logo, including favicon.
-- [x] Preserve approved copy and disabled deferred actions; document publication dependencies.
-- [x] Verify imagery, translations, and desktop/mobile Arabic RTL layouts.
+# Showcase publication
 
-## Arabic rendering review
-- [x] Correct language-menu direction, dialog alignment, font inheritance, and mixed-direction form fields.
-- [x] Verify Arabic regular/bold fonts, all four pages, and mobile/desktop interactions.
-
-## Showcase motion
-- [x] Add progressive entrances, illustration movement, and interactive highlights.
-- [x] Verify desktop/mobile RTL motion and reduced-motion behavior.
+- [x] Replace the framework with root-level static HTML, CSS and JavaScript.
+- [x] Retain all French, English and Arabic pages and approved copy.
+- [x] Localize illustrations, original SVG logo/favicon, Nexa and Arabic fonts.
+- [x] Preserve unavailable integration controls and generic device illustrations.
+- [x] Provide reproducible generation and static validation.
+- [x] Configure `aboutcare.raystate.com`; generate CNAME, canonical metadata and sitemap.
+- [ ] Supply verified store listings and official localized badges.
+- [ ] Supply approved portal, resources and legal destinations.
+- [ ] Configure contact delivery and verify inbox receipt.
+- [ ] Push and configure GitHub Pages; verify live routes and HTTPS.
