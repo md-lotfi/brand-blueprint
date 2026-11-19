@@ -1,0 +1,30 @@
+. Qui sommes-nous
+ Mindcare est une plateforme numérique algérienne de santé mentale, éditée par l'entreprise Mindlynk : mail : Mindcare.dz@gmail.com
+2. Données que nous collectons
+ Lors de la création et de l’utilisation de votre compte, nous collectons :
+Nom et prénom
+Adresse e-mail
+Pseudo
+Identifiants de connexion (le mot de passe est stocké sous forme chiffrée)
+Informations nécessaires à la création et à la gestion du compte
+[Si l’application collecte autre chose (rendez-vous, messages, téléphone, localisation, paiements, statistiques d’usage), ajoutez-le ici.]
+3. Pourquoi nous les utilisons
+Créer et gérer votre compte
+Vous permettre de vous connecter de façon sécurisée
+Vous contacter au sujet de votre compte ou de nos services
+Assurer la sécurité de la plateforme et prévenir les abus
+Respecter nos obligations légales
+4. Base légale
+ Nous traitons vos données avec votre consentement et pour exécuter le service que vous demandez, conformément à la loi algérienne n° 18-07 relative à la protection des personnes physiques dans le traitement des données à caractère personnel.
+6. Conservation
+ Vos données sont conservées tant que votre compte est actif. À la suppression du compte, elles sont effacées dans un délai de [30] jours, sauf obligation légale de conservation.
+7. Sécurité
+ Nous appliquons des mesures techniques et organisationnelles pour protéger vos données (chiffrement des mots de passe, connexion sécurisée, accès restreint). Aucun système n’étant totalement infaillible, nous ne pouvons garantir une sécurité absolue.
+8. Vos droits
+ Vous pouvez à tout moment accéder à vos données, les corriger, demander leur suppression, retirer votre consentement ou vous opposer à leur traitement, en écrivant à [e-mail de support].
+9. Suppression du compte
+ Vous pouvez demander la suppression de votre compte et de vos données depuis l’application [ou en écrivant à l’adresse ci-dessus]. Google Play exige que cette possibilité soit indiquée clairement.
+11. Modifications
+ Nous pouvons mettre à jour cette politique. La date de la dernière mise à jour figure en haut de la page, et nous vous informerons en cas de changement important.
+12. Contact
+Mindcare.dz@gmail.com

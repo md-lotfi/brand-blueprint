@@ -5,7 +5,7 @@ import json
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
-from render_pages import ROOT, C, T, render_all
+from render_pages import ROOT, C, T, PRIVACY, render_all
 
 class Document(HTMLParser):
     def __init__(self, source):
@@ -49,6 +49,24 @@ for name,doc in documents.items():
 for filename,digest in json.loads((ROOT/'tools/asset_checksums.json').read_text()).items():
     asset=ROOT/filename
     check(asset.exists() and hashlib.sha256(asset.read_bytes()).hexdigest()==digest,'Asset mismatch: '+filename)
+# Policy content and publication state stay consistent across locales.
+check(set(PRIVACY['locales'])==set(T),'Privacy locale coverage')
+for locale,policy in PRIVACY['locales'].items():
+    name=f'{locale}/confidentialite/index.html'
+    source=outputs[name]
+    doc=documents[name]
+    check(len(policy['sections'])==10,name+': policy section coverage')
+    check('mailto:'+PRIVACY['contact'] in source,name+': contact link')
+    check('[30]' in source,name+': provisional retention preserved')
+    check(all(f'id="policy-{section["id"]}"' in source for section in policy['sections']),name+': policy anchors')
+    check(not any(attrs.get('class') in ('policy-notice','policy-pending') for tag,attrs in doc.tags),name+': no editorial notices')
+    if PRIVACY['status']=='final':
+        check(not any(tag=='meta' and attrs.get('name')=='robots' and 'noindex' in attrs.get('content','') for tag,attrs in doc.tags),name+': final policy indexing')
+        if C['publicOrigin']:
+            check('/'+locale+'/confidentialite/' in outputs.get('sitemap.xml',''),name+': final policy sitemap')
+    for page in ('index.html','patients/index.html','psychologues/index.html','a-propos/index.html'):
+        links=documents[f'{locale}/{page}'].tags
+        check(any(tag=='a' and 'confidentialite/' in attrs.get('href','') for tag,attrs in links),name+': footer link from '+page)
 # Check future enablement and the requirement for official localized badges.
 original=C.copy()
 try:

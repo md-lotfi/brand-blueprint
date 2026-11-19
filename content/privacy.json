@@ -1,0 +1,277 @@
+{
+  "status": "final",
+  "revised": "2026-11-19",
+  "contact": "Mindcare.dz@gmail.com",
+  "locales": {
+    "fr": {
+      "title": "Politique de confidentialité",
+      "description": "Politique de confidentialité de Mindcare, plateforme algérienne de santé mentale éditée par Mindlynk.",
+      "revision": "Dernière mise à jour",
+      "date": "19 novembre 2026",
+      "contents": "Sur cette page",
+      "sections": [
+        {
+          "id": "identity",
+          "title": "Qui sommes-nous ?",
+          "paragraphs": [
+            "Mindcare est une plateforme numérique algérienne de santé mentale, éditée par l’entreprise Mindlynk. Adresse e-mail : Mindcare.dz@gmail.com."
+          ]
+        },
+        {
+          "id": "data",
+          "title": "Données que nous collectons",
+          "paragraphs": [
+            "Lors de la création et de l’utilisation de votre compte, nous collectons :"
+          ],
+          "items": [
+            "Nom et prénom",
+            "Adresse e-mail",
+            "Pseudo",
+            "Identifiants de connexion (le mot de passe est stocké sous forme chiffrée)",
+            "Informations nécessaires à la création et à la gestion du compte"
+          ]
+        },
+        {
+          "id": "purposes",
+          "title": "Pourquoi nous les utilisons",
+          "items": [
+            "Créer et gérer votre compte",
+            "Vous permettre de vous connecter de façon sécurisée",
+            "Vous contacter au sujet de votre compte ou de nos services",
+            "Assurer la sécurité de la plateforme et prévenir les abus",
+            "Respecter nos obligations légales"
+          ]
+        },
+        {
+          "id": "basis",
+          "title": "Base légale",
+          "paragraphs": [
+            "Nous traitons vos données avec votre consentement et pour exécuter le service que vous demandez, conformément à la loi algérienne n° 18-07 relative à la protection des personnes physiques dans le traitement des données à caractère personnel."
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Conservation",
+          "paragraphs": [
+            "Vos données sont conservées tant que votre compte est actif. À la suppression du compte, elles sont effacées dans un délai de [30] jours, sauf obligation légale de conservation."
+          ]
+        },
+        {
+          "id": "security",
+          "title": "Sécurité",
+          "paragraphs": [
+            "Nous appliquons des mesures techniques et organisationnelles pour protéger vos données (chiffrement des mots de passe, connexion sécurisée, accès restreint). Aucun système n’étant totalement infaillible, nous ne pouvons garantir une sécurité absolue."
+          ]
+        },
+        {
+          "id": "rights",
+          "title": "Vos droits",
+          "paragraphs": [
+            "Vous pouvez à tout moment accéder à vos données, les corriger, demander leur suppression, retirer votre consentement ou vous opposer à leur traitement, en écrivant à Mindcare.dz@gmail.com."
+          ]
+        },
+        {
+          "id": "deletion",
+          "title": "Suppression du compte",
+          "paragraphs": [
+            "Vous pouvez demander la suppression de votre compte et de vos données depuis l’application [ou en écrivant à l’adresse ci-dessus]."
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Modifications",
+          "paragraphs": [
+            "Nous pouvons mettre à jour cette politique. La date de la dernière mise à jour figure en haut de la page, et nous vous informerons en cas de changement important."
+          ]
+        },
+        {
+          "id": "contact",
+          "title": "Contact",
+          "paragraphs": [
+            "Mindcare.dz@gmail.com"
+          ]
+        }
+      ]
+    },
+    "en": {
+      "title": "Privacy Policy",
+      "description": "Privacy policy for Mindcare, an Algerian mental health platform published by Mindlynk.",
+      "revision": "Last updated",
+      "date": "19 November 2026",
+      "contents": "On this page",
+      "sections": [
+        {
+          "id": "identity",
+          "title": "Who we are",
+          "paragraphs": [
+            "Mindcare is an Algerian digital mental health platform published by Mindlynk. Email: Mindcare.dz@gmail.com."
+          ]
+        },
+        {
+          "id": "data",
+          "title": "Data we collect",
+          "paragraphs": [
+            "When you create and use your account, we collect:"
+          ],
+          "items": [
+            "First and last name",
+            "Email address",
+            "Nickname",
+            "Login credentials (the password is stored in encrypted form)",
+            "Information needed to create and manage your account"
+          ]
+        },
+        {
+          "id": "purposes",
+          "title": "Why we use your data",
+          "items": [
+            "To create and manage your account",
+            "To allow you to log in securely",
+            "To contact you about your account or our services",
+            "To keep the platform secure and prevent abuse",
+            "To comply with our legal obligations"
+          ]
+        },
+        {
+          "id": "basis",
+          "title": "Legal basis",
+          "paragraphs": [
+            "We process your data with your consent and to provide the service you request, in accordance with Algerian Law No. 18-07 on the protection of individuals in the processing of personal data."
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Data retention",
+          "paragraphs": [
+            "Your data is retained while your account is active. When your account is deleted, your data is erased within [30] days, unless legal retention requirements apply."
+          ]
+        },
+        {
+          "id": "security",
+          "title": "Security",
+          "paragraphs": [
+            "We apply technical and organisational measures to protect your data (password encryption, secure connections and restricted access). As no system is completely infallible, we cannot guarantee absolute security."
+          ]
+        },
+        {
+          "id": "rights",
+          "title": "Your rights",
+          "paragraphs": [
+            "You may access or correct your data, request its deletion, withdraw your consent or object to its processing at any time by writing to Mindcare.dz@gmail.com."
+          ]
+        },
+        {
+          "id": "deletion",
+          "title": "Account deletion",
+          "paragraphs": [
+            "You may request deletion of your account and data from within the application [or by writing to the email address above]."
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Changes",
+          "paragraphs": [
+            "We may update this policy. The date of the latest update appears at the top of the page, and we will inform you of significant changes."
+          ]
+        },
+        {
+          "id": "contact",
+          "title": "Contact",
+          "paragraphs": [
+            "Mindcare.dz@gmail.com"
+          ]
+        }
+      ]
+    },
+    "ar": {
+      "title": "سياسة الخصوصية",
+      "description": "سياسة الخصوصية لمنصة Mindcare الجزائرية للصحة النفسية، التي تنشرها شركة Mindlynk.",
+      "revision": "آخر تحديث",
+      "date": "19 نوفمبر 2026",
+      "contents": "في هذه الصفحة",
+      "sections": [
+        {
+          "id": "identity",
+          "title": "من نحن؟",
+          "paragraphs": [
+            "Mindcare منصة رقمية جزائرية للصحة النفسية، تنشرها شركة Mindlynk. البريد الإلكتروني: Mindcare.dz@gmail.com."
+          ]
+        },
+        {
+          "id": "data",
+          "title": "البيانات التي نجمعها",
+          "paragraphs": [
+            "عند إنشاء حسابك واستخدامه، نجمع البيانات التالية:"
+          ],
+          "items": [
+            "الاسم واللقب",
+            "عنوان البريد الإلكتروني",
+            "الاسم المستعار",
+            "بيانات تسجيل الدخول (تُخزّن كلمة المرور بصيغة مشفّرة)",
+            "المعلومات اللازمة لإنشاء الحساب وإدارته"
+          ]
+        },
+        {
+          "id": "purposes",
+          "title": "لماذا نستخدم بياناتك؟",
+          "items": [
+            "إنشاء حسابك وإدارته",
+            "تمكينك من تسجيل الدخول بأمان",
+            "التواصل معك بشأن حسابك أو خدماتنا",
+            "الحفاظ على أمن المنصة ومنع إساءة الاستخدام",
+            "الوفاء بالتزاماتنا القانونية"
+          ]
+        },
+        {
+          "id": "basis",
+          "title": "الأساس القانوني",
+          "paragraphs": [
+            "نعالج بياناتك بموافقتك ولتقديم الخدمة التي تطلبها، وفقًا للقانون الجزائري رقم 18-07 المتعلق بحماية الأشخاص الطبيعيين في مجال معالجة البيانات ذات الطابع الشخصي."
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "الاحتفاظ بالبيانات",
+          "paragraphs": [
+            "نحتفظ ببياناتك ما دام حسابك نشطًا. عند حذف الحساب، تُمحى البيانات خلال [30] يومًا، ما لم يوجد التزام قانوني بالاحتفاظ بها."
+          ]
+        },
+        {
+          "id": "security",
+          "title": "الأمان",
+          "paragraphs": [
+            "نطبّق تدابير تقنية وتنظيمية لحماية بياناتك، مثل تشفير كلمات المرور والاتصال الآمن وتقييد الوصول. ولأن أي نظام ليس معصومًا تمامًا من الأخطاء، لا يمكننا ضمان أمان مطلق."
+          ]
+        },
+        {
+          "id": "rights",
+          "title": "حقوقك",
+          "paragraphs": [
+            "يمكنك في أي وقت الاطلاع على بياناتك أو تصحيحها أو طلب حذفها أو سحب موافقتك أو الاعتراض على معالجتها، وذلك بمراسلتنا على Mindcare.dz@gmail.com."
+          ]
+        },
+        {
+          "id": "deletion",
+          "title": "حذف الحساب",
+          "paragraphs": [
+            "يمكنك طلب حذف حسابك وبياناتك من داخل التطبيق [أو بمراسلة عنوان البريد الإلكتروني المذكور أعلاه]."
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "التعديلات",
+          "paragraphs": [
+            "قد نحدّث هذه السياسة. يظهر تاريخ آخر تحديث في أعلى الصفحة، وسنُعلمك بأي تغييرات مهمة."
+          ]
+        },
+        {
+          "id": "contact",
+          "title": "التواصل",
+          "paragraphs": [
+            "Mindcare.dz@gmail.com"
+          ]
+        }
+      ]
+    }
+  }
+}

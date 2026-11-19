@@ -8,8 +8,9 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 T = json.loads((ROOT / 'content/translations.json').read_text())
+PRIVACY = json.loads((ROOT / 'content/privacy.json').read_text())
 C = json.loads((ROOT / 'src/config/site.ts').read_text().split('export const siteConfig =', 1)[1].strip().removesuffix(';'))
-PAGES = {'home': '', 'patients': 'patients/', 'psy': 'psychologues/', 'about': 'a-propos/'}
+PAGES = {'home': '', 'patients': 'patients/', 'psy': 'psychologues/', 'about': 'a-propos/', 'privacy': 'confidentialite/'}
 NAMES = {'fr': 'Français', 'en': 'English', 'ar': 'العربية'}
 e = lambda s: html.escape(str(s), quote=True)
 
@@ -81,19 +82,33 @@ def render_all():
             elif page=='psy':
                 p=t['psy']
                 body=f'<section class="container hero"><div>{text("h1",p["title"])}{text("p",p["text"],"lead")}<div class="actions">{action("psychologistPortalUrl",p["action"])}<a class="text-link" href="#fonctionnalites">{e(p["discover"])} →</a></div></div>{mock("laptop")}</section><section id="fonctionnalites" class="soft section"><div class="container"><div class="section-heading">{text("h2",p["capTitle"])}</div>{caps(p["caps"],["✧","▦","◇","▤"])}</div></section><section class="container section"><div class="closing accent"><div>{text("h2",p["closeTitle"])}{text("p",p["closeText"],"lead")}<div class="actions">{action("psychologistPortalUrl",p["action"])}<a class="text-link" href="{route()}#contact">{e(h["contactTeam"])} →</a></div></div>{image("psychologist.jpg","blend")}</div></section>'
+            elif page=='privacy':
+                policy = PRIVACY['locales'][locale]
+                def policy_text(value):
+                    email = PRIVACY['contact']
+                    return e(value).replace(e(email), f'<a class="policy-email" href="mailto:{e(email)}"><bdi dir="ltr">{e(email)}</bdi></a>')
+                toc = '<nav class="policy-toc" aria-label="'+e(policy['contents'])+'">'+text('h2',policy['contents'])+'<ol>'+''.join(f'<li><a href="#policy-{e(section["id"])}">{e(section["title"])}</a></li>' for section in policy['sections'])+'</ol></nav>'
+                sections = ''
+                for number, section in enumerate(policy['sections'],1):
+                    paragraphs = ''.join('<p>'+policy_text(value)+'</p>' for value in section.get('paragraphs',[]))
+                    items = '<ul>'+''.join('<li>'+policy_text(value)+'</li>' for value in section['items'])+'</ul>' if section.get('items') else ''
+                    sections += f'<section id="policy-{e(section["id"])}"><h2>{number}. {e(section["title"])}</h2>{paragraphs}{items}</section>'
+                body = f'<div class="container policy-page"><div class="policy-heading">{text("h1",policy["title"])}<p class="muted">{e(policy["revision"])} : <time datetime="{e(PRIVACY["revised"])}">{e(policy["date"])}</time></p></div><div class="policy-layout">{toc}<article class="policy-document" aria-label="{e(policy["title"])}">{sections}</article></div></div>'
             else:
                 body=f'<section class="container hero about"><div>{text("h1",t["about"]["title"])}{text("p",t["about"]["text"],"lead")}{text("p",t["about"]["objective"],"lead")}</div>{image("brain.jpg","blend",False)}</section>'
-            nav=''.join(f'<a href="{route(key=k)}"'+(' aria-current="page"' if k==page else '')+f'>{e(t["nav"][k])}</a>' for k in PAGES)+action('resourcesUrl',t['nav']['resources'],'nav-link')
+            nav=''.join(f'<a href="{route(key=k)}"'+(' aria-current="page"' if k==page else '')+f'>{e(t["nav"][k])}</a>' for k in PAGES if k!='privacy')+action('resourcesUrl',t['nav']['resources'],'nav-link')
             languages=''.join(f'<a lang="{l}" dir="{"rtl" if l=="ar" else "ltr"}" href="{route(l,page)}"'+(' aria-current="true"' if l==locale else '')+f'>{e(name)}</a>' for l,name in NAMES.items())
             login=f'<details class="login disclosure"><summary class="button outline">{e(t["nav"]["login"])}</summary><div class="panel">{text("h2",t["ui"]["loginTitle"])}{text("p",t["ui"]["loginDesc"])}{action("patientEntryUrl",t["ui"]["patient"],"button outline")}{action("psychologistPortalUrl",t["ui"]["psychologist"],"button outline")}</div></details>'
             header=f'<a class="skip-link" href="#main">{e(t["ui"]["skip"])}</a><header><div class="container header-row"><a href="{route()}" aria-label="Mindcare">{logo()}</a><nav class="desktop-nav" aria-label="{e(t["ui"]["menu"])}">{nav}</nav><div class="header-actions"><details class="language disclosure"><summary aria-label="{e(t["ui"]["language"])}"><span aria-hidden="true">◎</span> <bdi class="latin">{locale.upper()}</bdi></summary><nav class="panel">{languages}</nav></details>{login}<details class="mobile-nav disclosure"><summary aria-label="{e(t["ui"]["menu"])}">☰</summary><nav class="panel">{nav}</nav></details></div></div></header>'
-            footer='<footer><div class="container footer-row"><div>'+logo()+text('p',t['footer']['brand'],'muted')+'</div><nav>'+''.join(action(key,t['footer'][label],'nav-link') for key,label in [('privacyUrl','privacy'),('legalNoticeUrl','legal'),('termsUrl','terms')])+f'<a href="{route()}#contact">{e(t["footer"]["contact"])}</a></nav></div></footer>'
-            title,description=t['meta'][page]
+            footer='<footer><div class="container footer-row"><div>'+logo()+text('p',t['footer']['brand'],'muted')+'</div><nav>'+''.join((f'<a class="nav-link" href="{route(key="privacy")}"'+(' aria-current="page"' if page=='privacy' else '')+f'>{e(t["footer"][label])}</a>' if key=='privacyUrl' and not C.get(key) else action(key,t['footer'][label],'nav-link')) for key,label in [('privacyUrl','privacy'),('legalNoticeUrl','legal'),('termsUrl','terms')])+f'<a href="{route()}#contact">{e(t["footer"]["contact"])}</a></nav></div></footer>'
+            title,description=(PRIVACY['locales'][locale]['title']+' — Mindcare', PRIVACY['locales'][locale]['description']) if page=='privacy' else t['meta'][page]
             origin=C['publicOrigin']
             seo=''
             if origin:
                 canonical=origin.rstrip('/')+'/'+locale+'/'+slug
                 seo=f'<link rel="canonical" href="{e(canonical)}"><meta property="og:url" content="{e(canonical)}">'+''.join(f'<link rel="alternate" hreflang="{l}" href="{e(origin.rstrip("/")+"/"+l+"/"+slug)}">' for l in T)
+            if page=='privacy' and PRIVACY['status']=='draft':
+                seo += '<meta name="robots" content="noindex, follow">'
             messages=json.dumps({k:t['ui'][k] for k in ['sending','success','failure']},ensure_ascii=False).replace('<','\\u003c')
             output[dest]=f'''<!doctype html>
 <html lang="{locale}" dir="{'rtl' if locale=='ar' else 'ltr'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description)}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(description)}"><meta property="og:type" content="website"><meta name="twitter:card" content="summary">{seo}<link rel="icon" type="image/svg+xml" href="{url('favicon.svg')}"><link rel="stylesheet" href="{url('styles.css')}"><script src="{url('script.js')}" defer></script></head><body>{header}<main id="main" tabindex="-1" data-page="{page}">{body}</main>{footer}<script type="application/json" id="contact-config">{json.dumps({'endpoint':C['contactEndpoint'],'locale':locale},ensure_ascii=False).replace('<','\\u003c')}</script><script type="application/json" id="contact-messages">{messages}</script></body></html>
@@ -113,7 +128,7 @@ def render_all():
         hostname=urlparse(origin).hostname
         if hostname and not hostname.endswith('.github.io'):
             output['CNAME']=hostname+'\n'
-        output['sitemap.xml']='<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(f'<url><loc>{e(origin+"/"+str(Path(p).parent)+"/")}</loc></url>' for p in output if p.endswith('index.html') and p!='index.html')+'</urlset>\n'
+        output['sitemap.xml']='<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(f'<url><loc>{e(origin+"/"+str(Path(p).parent)+"/")}</loc></url>' for p in output if p.endswith('index.html') and p!='index.html' and not (PRIVACY['status']=='draft' and '/confidentialite/' in p))+'</urlset>\n'
         output['robots.txt']='User-agent: *\nAllow: /\nSitemap: '+origin+'/sitemap.xml\n'
     else:
         output['robots.txt']='User-agent: *\nAllow: /\n'
@@ -126,4 +141,4 @@ if __name__=='__main__':
         path=ROOT/name
         path.parent.mkdir(parents=True,exist_ok=True)
         path.write_text(value,encoding='utf-8')
-    print('Generated 12 localized pages, French root, 404 and hosting files.')
+    print(f'Generated {len(T)*len(PAGES)} localized pages, French root, 404 and hosting files.')

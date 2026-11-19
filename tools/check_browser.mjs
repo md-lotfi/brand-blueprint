@@ -37,7 +37,7 @@ try {
   await evaluate('document.fonts.ready.then(()=>true)');
  };
  const screenshot=async filename=>{const r=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});fs.writeFileSync(filename,Buffer.from(r.data,'base64'))};
- const pages=['','fr/','en/','ar/',...['fr','en','ar'].flatMap(l=>['patients/','psychologues/','a-propos/'].map(p=>l+'/'+p))];
+ const pages=['','fr/','en/','ar/',...['fr','en','ar'].flatMap(l=>['patients/','psychologues/','a-propos/','confidentialite/'].map(p=>l+'/'+p))];
  for(const route of pages){
   for(const width of [320,390,768,1440]){
    await viewport(width);await navigate(route);
@@ -65,9 +65,15 @@ try {
  await call('Emulation.setScriptExecutionDisabled',{value:true});
  await navigate('fr/');
  assert(await evaluate(`document.querySelector('main').innerText.length>1000&&document.querySelector('form button').disabled`),'content and safe contact without JS');
+ await navigate('fr/confidentialite/');
+ assert(await evaluate(`document.querySelectorAll('.policy-document section').length===10&&!document.querySelector('.policy-notice')&&!document.querySelector('.policy-pending')`),'privacy content without editorial notices or JS');
  await call('Emulation.setScriptExecutionDisabled',{value:false});
  await viewport(1440);await navigate('');await screenshot('/tmp/mindcare-desktop.png');
  await viewport(390);await navigate('ar/');await screenshot('/tmp/mindcare-ar-mobile.png');
+ await viewport(1440);await navigate('fr/confidentialite/');await screenshot('/tmp/mindcare-privacy-fr-desktop.png');
+ assert(await evaluate(`document.querySelectorAll(".language a").length===3&&[...document.querySelectorAll(".language a")].every(a=>new URL(a.href).pathname.endsWith("/confidentialite/"))`),'privacy language switch retains page');
+ await viewport(390);await navigate('en/confidentialite/');await screenshot('/tmp/mindcare-privacy-en-mobile.png');
+ await navigate('ar/confidentialite/');await screenshot('/tmp/mindcare-privacy-ar-mobile.png');
  assert(!exceptions.length,'browser exceptions '+JSON.stringify(exceptions));
  const report={origin,layouts:results.length,failures,results};fs.writeFileSync('/tmp/mindcare-browser-results.json',JSON.stringify(report,null,2));
  console.log(JSON.stringify({origin,layouts:results.length,failures},null,2));
