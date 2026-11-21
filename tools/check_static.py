@@ -5,7 +5,7 @@ import json
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
-from render_pages import ROOT, C, T, PRIVACY, render_all
+from render_pages import ROOT, C, T, PRIVACY, REVIEW_PAGE, REVIEW_VIDEO, render_all
 
 class Document(HTMLParser):
     def __init__(self, source):
@@ -26,7 +26,7 @@ for name, expected in outputs.items():
 for name,doc in documents.items():
     check(sum(tag=='h1' for tag,a in doc.tags)==1,name+': expected one h1')
     if name=='404.html': continue
-    locale=name.split('/')[0] if '/' in name else 'fr'
+    locale='en' if name==REVIEW_PAGE else name.split('/')[0] if '/' in name else 'fr'
     check(any(tag=='html' and a.get('lang')==locale and a.get('dir')==('rtl' if locale=='ar' else 'ltr') for tag,a in doc.tags),name+': language/direction')
     check(sum(tag=='main' for tag,a in doc.tags)==1,name+': expected one main')
     check('/__l5e/' not in outputs[name] and 'react' not in outputs[name].lower(),name+': framework/CDN pointer')
@@ -49,6 +49,16 @@ for name,doc in documents.items():
 for filename,digest in json.loads((ROOT/'tools/asset_checksums.json').read_text()).items():
     asset=ROOT/filename
     check(asset.exists() and hashlib.sha256(asset.read_bytes()).hexdigest()==digest,'Asset mismatch: '+filename)
+# Review evidence is reachable directly, without becoming a public site destination.
+review=documents[REVIEW_PAGE]
+check(any(tag=='meta' and a.get('name')=='robots' and {'noindex','nofollow','noarchive'} <= set(a.get('content','').replace(',',' ').split()) for tag,a in review.tags),'Review page indexing directive')
+videos=[a for tag,a in review.tags if tag=='video']
+check(len(videos)==1 and 'controls' in videos[0] and 'playsinline' in videos[0] and 'autoplay' not in videos[0] and videos[0].get('preload')=='metadata','Review video controls and loading')
+check(any(tag=='source' and a.get('src')==Path(REVIEW_VIDEO).name and a.get('type')=='video/mp4' for tag,a in review.tags),'Review MP4 source')
+check(any(tag=='a' and a.get('href')==Path(REVIEW_VIDEO).name and 'download' in a for tag,a in review.tags),'Review MP4 download')
+for name,source in outputs.items():
+    if name!=REVIEW_PAGE:
+        check('app-review/foreground-services' not in source,'Review destination must remain unlisted: '+name)
 # Policy content and publication state stay consistent across locales.
 check(set(PRIVACY['locales'])==set(T),'Privacy locale coverage')
 for locale,policy in PRIVACY['locales'].items():

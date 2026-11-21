@@ -12,7 +12,39 @@ PRIVACY = json.loads((ROOT / 'content/privacy.json').read_text())
 C = json.loads((ROOT / 'src/config/site.ts').read_text().split('export const siteConfig =', 1)[1].strip().removesuffix(';'))
 PAGES = {'home': '', 'patients': 'patients/', 'psy': 'psychologues/', 'about': 'a-propos/', 'privacy': 'confidentialite/'}
 NAMES = {'fr': 'Français', 'en': 'English', 'ar': 'العربية'}
+REVIEW_PAGE = 'app-review/foreground-services/index.html'
+REVIEW_VIDEO = 'app-review/foreground-services/mindcare-foreground-services.mp4'
 e = lambda s: html.escape(str(s), quote=True)
+
+def render_review_page():
+    return '''<!doctype html>
+<html lang="en" dir="ltr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Play review — MindCare foreground services</title>
+<meta name="description" content="MindCare foreground-service demonstration recorded on a Samsung Galaxy A20: starting a consultation, background audio and picture-in-picture, and leaving the call.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+.review-page{padding-block:32px 64px}.review-brand{margin-bottom:32px}.review-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:40px;align-items:start}.review-copy{min-width:0}.review-copy h1{margin-block:12px 24px}.review-copy p+p{margin-top:16px}.review-copy ul{padding-inline-start:24px;margin-block:24px}.review-copy li+li{margin-top:12px}.review-copy .button{margin-top:24px;background:var(--deep);color:#fff}.review-player{min-width:0}.review-video{display:block;width:100%;height:auto;background:#111;border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 28px #2357891a}.review-player p{margin-top:16px;font-size:.9rem}.review-player a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){.review-layout{grid-template-columns:minmax(0,1fr);gap:28px}.review-player{width:100%;max-width:360px;margin-inline:auto}.review-copy .button{margin-top:16px}}
+</style></head><body>
+<main class="container review-page" data-page="review" id="main">
+<div class="review-brand"><a class="logo" href="../../" aria-label="MindCare home"><img src="../../assets/mindcare-logo.svg" width="222" height="175" alt=""><bdi class="latin">Mindcare</bdi></a></div>
+<div class="review-layout"><section class="review-copy" aria-labelledby="review-title">
+<p class="eyebrow">Google Play review</p>
+<h1 id="review-title">Consultation foreground services</h1>
+<p>This recording demonstrates MindCare's media playback and microphone foreground-service use during a patient–psychologist consultation.</p>
+<ul><li>The patient starts the consultation from the appointment screen.</li><li>The call continues with audio and picture-in-picture after the patient opens the Home screen.</li><li>The patient returns to MindCare and leaves the call.</li></ul>
+<p class="muted">Recorded on a Samsung Galaxy A20 with test accounts and real test-call audio.</p>
+<a class="button" href="mindcare-foreground-services.mp4" download>Download the video (MP4)</a>
+</section><section class="review-player" aria-label="Recorded app demonstration">
+<video class="review-video" controls playsinline preload="metadata" width="720" height="1560" aria-label="MindCare consultation, background audio and picture-in-picture demonstration">
+<source src="mindcare-foreground-services.mp4" type="video/mp4">
+Your browser cannot play this video. <a href="mindcare-foreground-services.mp4">Open the MP4 directly.</a>
+</video><p>If playback is unavailable, <a href="mindcare-foreground-services.mp4">open the MP4 directly</a>.</p>
+</section></div></main></body></html>
+'''
 
 def icon(symbol):
     paths={
@@ -47,6 +79,10 @@ def render_all():
                 return f'<img src="{e(url("assets/"+name))}" alt="{e(alt)}" width="{w}" height="{h}" class="{cls}"'+ (' loading="lazy"' if lazy else '')+'>'
             def action(key, text, cls='button'):
                 href = C.get(key)
+                if key in ('accountDeletionUrl', 'dataDeletionUrl') and href:
+                    destination, separator, fragment = href.partition('#')
+                    destination += ('&' if '?' in destination else '?') + 'lang=' + locale
+                    href = destination + (separator + fragment if separator else '')
                 if not href:
                     return f'<span role="link" aria-disabled="true" class="{cls} unavailable">{e(text)}</span>'
                 return f'<a href="{e(href)}" class="{cls}" target="_blank" rel="noopener noreferrer">{e(text)}</a>'
@@ -100,7 +136,7 @@ def render_all():
             languages=''.join(f'<a lang="{l}" dir="{"rtl" if l=="ar" else "ltr"}" href="{route(l,page)}"'+(' aria-current="true"' if l==locale else '')+f'>{e(name)}</a>' for l,name in NAMES.items())
             login=f'<details class="login disclosure"><summary class="button outline">{e(t["nav"]["login"])}</summary><div class="panel">{text("h2",t["ui"]["loginTitle"])}{text("p",t["ui"]["loginDesc"])}{action("patientEntryUrl",t["ui"]["patient"],"button outline")}{action("psychologistPortalUrl",t["ui"]["psychologist"],"button outline")}</div></details>'
             header=f'<a class="skip-link" href="#main">{e(t["ui"]["skip"])}</a><header><div class="container header-row"><a href="{route()}" aria-label="Mindcare">{logo()}</a><nav class="desktop-nav" aria-label="{e(t["ui"]["menu"])}">{nav}</nav><div class="header-actions"><details class="language disclosure"><summary aria-label="{e(t["ui"]["language"])}"><span aria-hidden="true">◎</span> <bdi class="latin">{locale.upper()}</bdi></summary><nav class="panel">{languages}</nav></details>{login}<details class="mobile-nav disclosure"><summary aria-label="{e(t["ui"]["menu"])}">☰</summary><nav class="panel">{nav}</nav></details></div></div></header>'
-            footer='<footer><div class="container footer-row"><div>'+logo()+text('p',t['footer']['brand'],'muted')+'</div><nav>'+''.join((f'<a class="nav-link" href="{route(key="privacy")}"'+(' aria-current="page"' if page=='privacy' else '')+f'>{e(t["footer"][label])}</a>' if key=='privacyUrl' and not C.get(key) else action(key,t['footer'][label],'nav-link')) for key,label in [('privacyUrl','privacy'),('legalNoticeUrl','legal'),('termsUrl','terms')])+f'<a href="{route()}#contact">{e(t["footer"]["contact"])}</a></nav></div></footer>'
+            footer='<footer><div class="container footer-row"><div>'+logo()+text('p',t['footer']['brand'],'muted')+'</div><nav>'+''.join((f'<a class="nav-link" href="{route(key="privacy")}"'+(' aria-current="page"' if page=='privacy' else '')+f'>{e(t["footer"][label])}</a>' if key=='privacyUrl' and not C.get(key) else action(key,t['footer'][label],'nav-link')) for key,label in [('privacyUrl','privacy'),('legalNoticeUrl','legal'),('termsUrl','terms'),('accountDeletionUrl','accountDeletion')]+([('dataDeletionUrl','dataDeletion')] if C.get('dataDeletionUrl') else []))+f'<a href="{route()}#contact">{e(t["footer"]["contact"])}</a></nav></div></footer>'
             title,description=(PRIVACY['locales'][locale]['title']+' — Mindcare', PRIVACY['locales'][locale]['description']) if page=='privacy' else t['meta'][page]
             origin=C['publicOrigin']
             seo=''
@@ -120,6 +156,7 @@ def render_all():
     # Relative directory targets must retain their final slash.
     root=re.sub(r'href="(fr|en|ar)(/[^".#]+)?"',lambda m:'href="'+m[1]+(m[2] or '')+'/"',root)
     output['index.html']=root
+    output[REVIEW_PAGE]=render_review_page()
     home_url=e(C['publicOrigin'] or '/')
     output['404.html']=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>404 — Mindcare</title></head><body><h1>404</h1><p>Page not found. / Page introuvable. / <span lang="ar" dir="rtl">الصفحة غير موجودة.</span></p><p><a id="home" href="{home_url}">Mindcare</a></p><script>if (document.getElementById('home').getAttribute('href') === '/' && location.hostname.endsWith('.github.io')) document.getElementById('home').href = '/' + location.pathname.split('/').filter(Boolean)[0] + '/';</script></body></html>\n'''
     output['.nojekyll']=''
@@ -128,7 +165,7 @@ def render_all():
         hostname=urlparse(origin).hostname
         if hostname and not hostname.endswith('.github.io'):
             output['CNAME']=hostname+'\n'
-        output['sitemap.xml']='<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(f'<url><loc>{e(origin+"/"+str(Path(p).parent)+"/")}</loc></url>' for p in output if p.endswith('index.html') and p!='index.html' and not (PRIVACY['status']=='draft' and '/confidentialite/' in p))+'</urlset>\n'
+        output['sitemap.xml']='<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(f'<url><loc>{e(origin+"/"+str(Path(p).parent)+"/")}</loc></url>' for p in output if p.endswith('index.html') and p not in ('index.html', REVIEW_PAGE) and not (PRIVACY['status']=='draft' and '/confidentialite/' in p))+'</urlset>\n'
         output['robots.txt']='User-agent: *\nAllow: /\nSitemap: '+origin+'/sitemap.xml\n'
     else:
         output['robots.txt']='User-agent: *\nAllow: /\n'
@@ -141,4 +178,4 @@ if __name__=='__main__':
         path=ROOT/name
         path.parent.mkdir(parents=True,exist_ok=True)
         path.write_text(value,encoding='utf-8')
-    print(f'Generated {len(T)*len(PAGES)} localized pages, French root, 404 and hosting files.')
+    print(f'Generated {len(T)*len(PAGES)} localized pages, French root, unlisted review page, 404 and hosting files.')

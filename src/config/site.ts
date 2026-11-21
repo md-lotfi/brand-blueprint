@@ -11,6 +11,8 @@ export const siteConfig = {
   "psychologistPortalUrl": "https://mindcare.raystate.com/",
   "resourcesUrl": null,
   "privacyUrl": null,
+  "dataDeletionUrl": null,
+  "accountDeletionUrl": "https://mindcare.raystate.com/account-deletion",
   "legalNoticeUrl": null,
   "termsUrl": null,
   "contactEndpoint": null

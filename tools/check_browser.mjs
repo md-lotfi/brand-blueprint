@@ -37,14 +37,25 @@ try {
   await evaluate('document.fonts.ready.then(()=>true)');
  };
  const screenshot=async filename=>{const r=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});fs.writeFileSync(filename,Buffer.from(r.data,'base64'))};
- const pages=['','fr/','en/','ar/',...['fr','en','ar'].flatMap(l=>['patients/','psychologues/','a-propos/','confidentialite/'].map(p=>l+'/'+p))];
+ const reviewRoute='app-review/foreground-services/';
+ const pages=['','fr/','en/','ar/',...['fr','en','ar'].flatMap(l=>['patients/','psychologues/','a-propos/','confidentialite/'].map(p=>l+'/'+p)),reviewRoute];
  for(const route of pages){
   for(const width of [320,390,768,1440]){
    await viewport(width);await navigate(route);
    await evaluate(`Promise.all([...document.images].map(i=>{i.loading='eager';return i.decode().catch(()=>null)}))`);
    const state=await evaluate(`({overflow:document.documentElement.scrollWidth>innerWidth+1,broken:[...document.images].filter(i=>!i.naturalWidth).map(i=>i.getAttribute('src')),lang:document.documentElement.lang,dir:document.documentElement.dir,h1:document.querySelectorAll('h1').length,main:document.querySelectorAll('main').length,body:document.querySelector('main').innerText.length})`);
    const label=(route||'/')+' '+width;
-   assert(!state.overflow,label+' overflow');assert(!state.broken.length,label+' broken images '+state.broken);assert(state.h1===1&&state.main===1,label+' document structure');assert(state.body>100,label+' missing content');assert(state.lang===(route.startsWith('ar/')?'ar':route.startsWith('en/')?'en':'fr'),label+' language');assert(state.dir===(state.lang==='ar'?'rtl':'ltr'),label+' direction');results.push({route,width,...state});
+   assert(!state.overflow,label+' overflow');assert(!state.broken.length,label+' broken images '+state.broken);assert(state.h1===1&&state.main===1,label+' document structure');assert(state.body>100,label+' missing content');assert(state.lang===(route===reviewRoute||route.startsWith('en/')?'en':route.startsWith('ar/')?'ar':'fr'),label+' language');assert(state.dir===(state.lang==='ar'?'rtl':'ltr'),label+' direction');results.push({route,width,...state});
+   if(route===reviewRoute){
+    const media=await evaluate(`(async()=>{const v=document.querySelector('video');if(v.readyState<1)await new Promise((resolve,reject)=>{const t=setTimeout(()=>reject(Error('Video metadata timeout')),10000);v.addEventListener('loadedmetadata',()=>{clearTimeout(t);resolve()},{once:true});v.addEventListener('error',()=>{clearTimeout(t);reject(Error('Video metadata error'))},{once:true})});return {duration:v.duration,width:v.videoWidth,height:v.videoHeight,controls:v.controls,inline:v.playsInline,autoplay:v.autoplay,error:v.error?.code||null}})()`);
+    assert(media.duration>55&&media.duration<60&&media.width===720&&media.height===1560&&!media.error,label+' video metadata');
+    assert(media.controls&&media.inline&&!media.autoplay,label+' native video controls');
+    await evaluate(`(async()=>{const v=document.querySelector('video');v.muted=true;await v.play();return true})()`);await delay(350);
+    assert(await evaluate(`document.querySelector('video').currentTime>0&&!document.querySelector('video').paused`),label+' video plays');
+    await evaluate(`document.querySelector('video').pause()`);
+    const response=await evaluate(`fetch(document.querySelector('video').currentSrc,{method:'HEAD'}).then(r=>({status:r.status,type:r.headers.get('content-type')}))`);
+    assert(response.status===200&&response.type?.includes('video/mp4'),label+' public MP4 response');
+   }
   }
  }
  await viewport(390);await navigate('ar/');
@@ -74,6 +85,8 @@ try {
  assert(await evaluate(`document.querySelectorAll(".language a").length===3&&[...document.querySelectorAll(".language a")].every(a=>new URL(a.href).pathname.endsWith("/confidentialite/"))`),'privacy language switch retains page');
  await viewport(390);await navigate('en/confidentialite/');await screenshot('/tmp/mindcare-privacy-en-mobile.png');
  await navigate('ar/confidentialite/');await screenshot('/tmp/mindcare-privacy-ar-mobile.png');
+ await viewport(1440);await navigate(reviewRoute);await screenshot('/tmp/mindcare-review-desktop.png');
+ await viewport(320);await navigate(reviewRoute);await screenshot('/tmp/mindcare-review-mobile.png');
  assert(!exceptions.length,'browser exceptions '+JSON.stringify(exceptions));
  const report={origin,layouts:results.length,failures,results};fs.writeFileSync('/tmp/mindcare-browser-results.json',JSON.stringify(report,null,2));
  console.log(JSON.stringify({origin,layouts:results.length,failures},null,2));

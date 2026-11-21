@@ -120,7 +120,9 @@
       "privacy": "Confidentialité",
       "legal": "Mentions légales",
       "terms": "Conditions d’utilisation",
-      "contact": "Contact"
+      "contact": "Contact",
+      "accountDeletion": "Supprimer mon compte",
+      "dataDeletion": "Supprimer mes conversations"
     },
     "ui": {
       "skip": "Aller au contenu",
@@ -266,7 +268,9 @@
       "privacy": "Privacy",
       "legal": "Legal notice",
       "terms": "Terms of use",
-      "contact": "Contact"
+      "contact": "Contact",
+      "accountDeletion": "Delete my account",
+      "dataDeletion": "Delete my conversations"
     },
     "ui": {
       "skip": "Skip to content",
@@ -412,7 +416,9 @@
       "privacy": "السرّية",
       "legal": "الإشعارات القانونية",
       "terms": "شروط الاستخدام",
-      "contact": "اتصل بنا"
+      "contact": "اتصل بنا",
+      "accountDeletion": "حذف حسابي",
+      "dataDeletion": "حذف محادثاتي"
     },
     "ui": {
       "skip": "الانتقال إلى المحتوى",
